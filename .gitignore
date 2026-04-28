@@ -50,3 +50,38 @@ build
 # Ignore Kotlin plugin data
 .kotlin
 .gitattributes
+# Root build outputs (just in case)
+build/
+out/
+
+# IntelliJ IDEA (inside app/)
+app/.idea/
+app/*.iml
+
+# Gradle (inside app/)
+app/.gradle/
+
+# Build directories (inside app/)
+app/build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# Java compiled files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Temporary files
+*.tmp
+*.swp
