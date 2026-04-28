@@ -49,3 +49,4 @@ build
 
 # Ignore Kotlin plugin data
 .kotlin
+.gitattributes
