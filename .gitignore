@@ -5,7 +5,7 @@ build/
 !**/src/test/**/build/
 .kotlin
 #local
-app/src/examples/
+
 ### IntelliJ IDEA ###
 .idea/
 .idea/modules.xml
