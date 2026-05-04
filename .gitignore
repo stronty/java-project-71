@@ -80,7 +80,6 @@ Thumbs.db
 *.class
 
 # Package files
-*.jar
 *.war
 *.ear
 
