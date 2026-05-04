@@ -2,7 +2,8 @@ plugins {
     kotlin("jvm") version "2.3.21"
     application
     id("com.github.ben-manes.versions") version "0.53.0"
-    id("org.sonarqube") version "7.2.3.7755"
+    id("org.sonarqube") version "7.3.0.8198"
+    checkstyle
 
 }
 group = "hexlet.code"
@@ -11,7 +12,12 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
 }
-
+sonar {
+    properties {
+        property("sonar.projectKey", "stronty_java-project-71")
+        property("sonar.organization", "stronty")
+    }
+}
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("info.picocli:picocli:4.7.7")
@@ -25,12 +31,7 @@ application {
     mainClass.set("hexlet.code.App")
 }
 
-sonar {
-    properties {
-        property("sonar.projectKey", "stronty_java-project-61")
-        property("sonar.organization", "stronty")
-    }
-}
+
 
 tasks.test {
     useJUnitPlatform()

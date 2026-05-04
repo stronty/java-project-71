@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //import picocli.CommandLine;
 //import picocli.CommandLine.Parameters;
 //import picocli.CommandLine.Option;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +13,11 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+/**
+ * Tool for the toolless
+ * \@param \input the description of the parameter
+ * \@return the result of the operation
+ */
 public class Differ {
 
     public static Path getPath(String fileName) throws Exception{
