@@ -1,11 +1,11 @@
+.PHONY:build
+
 run:
 	gradle run
 run-dist:
 	./build/install/app/bin/app
-i:
+h:
 	gradle installDist
 	./build/install/app/bin/app -h
-startOver:
-	rm -rf ./build
-	make i
-	make run
+build:
+	gradle build

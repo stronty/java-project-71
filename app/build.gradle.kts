@@ -3,6 +3,7 @@ plugins {
     application
     id("com.github.ben-manes.versions") version "0.53.0"
     id("org.sonarqube") version "7.3.0.8198"
+    jacoco
     checkstyle
 
 }
@@ -31,8 +32,11 @@ application {
     mainClass.set("hexlet.code.App")
 }
 
-
+tasks.withType<Checkstyle> {
+    configFile = file("config/checkstyle/checkstyle.xml")
+}
 
 tasks.test {
     useJUnitPlatform()
+
 }
