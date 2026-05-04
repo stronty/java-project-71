@@ -33,8 +33,11 @@ application {
 }
 
 tasks.withType<Checkstyle> {
+
     configFile = file("config/checkstyle/checkstyle.xml")
     outputs.upToDateWhen { false }
+    ignoreFailures = false
+    maxWarnings = 0
 }
 
 tasks.test {
