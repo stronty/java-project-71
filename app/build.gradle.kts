@@ -34,6 +34,7 @@ application {
 
 tasks.withType<Checkstyle> {
     configFile = file("config/checkstyle/checkstyle.xml")
+    outputs.upToDateWhen { false }
 }
 
 tasks.test {
