@@ -1,5 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/stronty/java-project-71/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/stronty/java-project-71/actions)
+[![Java CI with Gradle](https://github.com/stronty/java-project-71/actions/workflows/gradle.yml/badge.svg)](https://github.com/stronty/java-project-71/actions/workflows/gradle.yml)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=stronty_java-project-71&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=stronty_java-project-71)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=stronty_java-project-71&metric=bugs)](https://sonarcloud.io/summary/new_code?id=stronty_java-project-71)
@@ -15,3 +16,4 @@
 
 
 [![asciicast](https://asciinema.org/a/fAzPOAKm8xokB0H2.svg)](https://asciinema.org/a/fAzPOAKm8xokB0H2)
+[![asciicast](https://asciinema.org/a/rJKjYNhnV645j5SW.svg)](https://asciinema.org/a/rJKjYNhnV645j5SW)
