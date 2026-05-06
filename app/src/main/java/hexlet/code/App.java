@@ -15,7 +15,7 @@ public class App implements Callable<Integer> {
     @CommandLine.Option(names = {"-f", "--format"},
           description = "output format [default: stylish]")
     private String format = "stylish";
-    @CommandLine.Option(names = {"-V", "--version"}, versionHelp = true,
+    @CommandLine.Option(names = {"-v", "--version"}, versionHelp = true,
           description = "Print version information and exit")
     private boolean versionInfoRequested;
     @CommandLine.Option(names = {"-h", "--help"}, usageHelp = true,

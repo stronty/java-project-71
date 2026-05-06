@@ -3,6 +3,7 @@ package hexlet.code;
 import static hexlet.code.Parser.parse;
 
 import hexlet.code.formatters.Formatter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,11 +16,11 @@ import java.util.TreeSet;
 
 public class Differ {
 
-    public static Path getPath(String fileName) throws Exception {
+    public static Path getPath(String fileName) {
         Path path = Paths.get(fileName).toAbsolutePath().normalize();
 
         if (!Files.exists(path)) {
-            throw new Exception("File '" + path + "' does not exist");
+            throw new RuntimeException("File '" + path + "' does not exist");
         }
         return path;
     }
@@ -53,10 +54,8 @@ public class Differ {
                 }
                 diffData.add(data);
             }
-
-
-        } catch (Exception b) {
-            throw new RuntimeException(b);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read input files", e);
         }
         return Formatter.decide(diffData, format);
     }
