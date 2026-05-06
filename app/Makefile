@@ -9,3 +9,7 @@ h:
 	./build/install/app/bin/app -h
 build:
 	gradle build
+
+complete:
+	gradle build
+	gradle install
