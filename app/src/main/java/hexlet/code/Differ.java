@@ -25,6 +25,10 @@ public class Differ {
         return path;
     }
 
+    public static String generate(String path1, String path2) {
+        return generate(path1, path2, "stylish");
+    }
+
     public static String generate(String path1, String path2, String format) {
         List<Map<String, Object>> diffData = new ArrayList<>();
         try {
