@@ -2,16 +2,20 @@ package hexlet.code;
 
 import static hexlet.code.Parser.parse;
 
+import hexlet.code.formatters.Formatter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeSet;
 
 public class Differ {
 
     public static Path getPath(String fileName) throws Exception {
-
         Path path = Paths.get(fileName).toAbsolutePath().normalize();
 
         if (!Files.exists(path)) {
@@ -20,9 +24,8 @@ public class Differ {
         return path;
     }
 
-    public static String generate(String path1, String path2) {
-        final String[] diff = {"{\n"};
-
+    public static String generate(String path1, String path2, String format) {
+        List<Map<String, Object>> diffData = new ArrayList<>();
         try {
             Map<String, Object> content1 = parse(getPath(path1));
             Map<String, Object> content2 = parse(getPath(path2));
@@ -34,24 +37,27 @@ public class Differ {
             for (String key : keys) {
                 boolean in1 = content1.containsKey(key);
                 boolean in2 = content2.containsKey(key);
+                Map<String, Object> data = new HashMap<>();
+                data.put("key", key);
+                data.put("oldValue", content1.get(key));
+                data.put("newValue", content2.get(key));
+
                 if (in1 && !in2) {
-                    diff[0] = diff[0] + "  - " + key + ": " + content1.get(key).toString() + "\n";
+                    data.put("status", "removed");
                 } else if (!in1 && in2) {
-                    diff[0] = diff[0] + "  + " + key + ": " + content2.get(key).toString() + "\n";
-                } else if (content1.get(key).equals(content2.get(key))) {
-                    diff[0] = diff[0] + "    " + key + ": " + content2.get(key) + "\n";
+                    data.put("status", "added");
+                } else if (Objects.equals(content1.get(key), content2.get(key))) {
+                    data.put("status", "unchanged");
                 } else {
-                    diff[0] = diff[0] + "  - " + key + ": " + content1.get(key).toString() + "\n";
-                    diff[0] = diff[0] + "  + " + key + ": " + content2.get(key).toString() + "\n";
+                    data.put("status", "updated");
                 }
+                diffData.add(data);
             }
 
 
         } catch (Exception b) {
             throw new RuntimeException(b);
         }
-
-        diff[0] = diff[0] + "}\n";
-        return diff[0];
+        return Formatter.decide(diffData, format);
     }
 }
