@@ -24,7 +24,7 @@ public class Stylish {
                 default -> { }
             }
         });
-        diff[0] = diff[0] + "}\n";
+        diff[0] = diff[0] + "}";
         return diff[0];
     }
 }
