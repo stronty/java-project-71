@@ -44,6 +44,7 @@ public class Plain {
                 }
             }
         });
+        diff[0] = diff[0].substring(0, diff[0].lastIndexOf("\n"));
         return diff[0];
     }
 }
