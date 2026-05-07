@@ -11,6 +11,9 @@ public class Json {
     public static String formatter(List<Map<String, Object>> data) {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Map<String, Object>> sorted = new ArrayList<>();
+        final var value = "value";
+        final var oldValue = "oldValue";
+        final var newValue = "newValue";
 
         data.forEach(line -> {
 
@@ -21,17 +24,17 @@ public class Json {
 
             switch (status) {
                 case "unchanged" -> {
-                    dataToJson.put("value", line.get("oldValue"));
+                    dataToJson.put(value, line.get(oldValue));
                 }
                 case "added" -> {
-                    dataToJson.put("value", line.get("newValue"));
+                    dataToJson.put(value, line.get(newValue));
                 }
                 case "removed" -> {
-                    dataToJson.put("value", line.get("oldValue"));
+                    dataToJson.put(value, line.get(oldValue));
                 }
                 default -> {
-                    dataToJson.put("oldValue", line.get("oldValue"));
-                    dataToJson.put("newValue", line.get("newValue"));
+                    dataToJson.put(oldValue, line.get(oldValue));
+                    dataToJson.put(newValue, line.get(newValue));
                 }
             }
             sorted.add(dataToJson);

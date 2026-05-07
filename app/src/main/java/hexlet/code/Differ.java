@@ -30,6 +30,7 @@ public class Differ {
     }
 
     public static String generate(String path1, String path2, String format) {
+        final var status = "status";
         List<Map<String, Object>> diffData = new ArrayList<>();
         try {
             Map<String, Object> content1 = parse(getPath(path1));
@@ -48,13 +49,13 @@ public class Differ {
                 data.put("newValue", content2.get(key));
 
                 if (in1 && !in2) {
-                    data.put("status", "removed");
+                    data.put(status, "removed");
                 } else if (!in1 && in2) {
-                    data.put("status", "added");
+                    data.put(status, "added");
                 } else if (Objects.equals(content1.get(key), content2.get(key))) {
-                    data.put("status", "unchanged");
+                    data.put(status, "unchanged");
                 } else {
-                    data.put("status", "updated");
+                    data.put(status, "updated");
                 }
                 diffData.add(data);
             }

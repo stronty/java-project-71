@@ -12,6 +12,7 @@ public class Plain {
 
     public static String formatter(List<Map<String, Object>> data) {
         final String[] diff = {""};
+        final var property = "Property '";
         data.forEach(line -> {
             var status = line.get("status").toString();
             var key = line.get("key");
@@ -37,11 +38,11 @@ public class Plain {
             }
 
             if (status.equals("removed")) {
-                diff[0] = diff[0] + "Property '" + key + "' was removed\n";
+                diff[0] = diff[0] + property + key + "' was removed\n";
             } else if (status.equals("added")) {
-                diff[0] = diff[0] + "Property '" + key + "' was added with value: " + newValue + "\n";
+                diff[0] = diff[0] + property + key + "' was added with value: " + newValue + "\n";
             } else if (status.equals("updated")) {
-                diff[0] = diff[0] + "Property '" + key + "' was updated."
+                diff[0] = diff[0] + property + key + "' was updated."
                         + " From " + oldValue + " to " + newValue + "\n";
             }
         });
