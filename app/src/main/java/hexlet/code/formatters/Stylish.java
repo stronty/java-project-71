@@ -13,15 +13,15 @@ public class Stylish {
             var oldValue = String.valueOf(line.getOrDefault("oldValue", ""));
             var newValue = String.valueOf(line.getOrDefault("newValue", ""));
 
-            switch (status) {
-                case "removed" -> diff[0] = diff[0] + "  - " + key + ": " + oldValue + "\n";
-                case "added" -> diff[0] = diff[0] + "  + " + key + ": " + newValue + "\n";
-                case "unchanged" -> diff[0] = diff[0] + "    " + key + ": " + oldValue + "\n";
-                case "updated" -> {
-                    diff[0] = diff[0] + "  - " + key + ": " + oldValue + "\n";
-                    diff[0] = diff[0] + "  + " + key + ": " + newValue + "\n";
-                }
-                default -> { }
+            if (status.equals("removed")) {
+                diff[0] = diff[0] + "  - " + key + ": " + oldValue + "\n";
+            } else if (status.equals("added")) {
+                diff[0] = diff[0] + "  + " + key + ": " + newValue + "\n";
+            } else if (status.equals("unchanged")) {
+                diff[0] = diff[0] + "    " + key + ": " + oldValue + "\n";
+            } else if (status.equals("updated")) {
+                diff[0] = diff[0] + "  - " + key + ": " + oldValue + "\n";
+                diff[0] = diff[0] + "  + " + key + ": " + newValue + "\n";
             }
         });
         diff[0] = diff[0] + "}";

@@ -135,7 +135,8 @@ class DifferTests {
                 + "{\"key\":\"numbers3\",\"status\":\"removed\",\"value\":[3,4,5]},"
                 + "{\"key\":\"numbers4\",\"status\":\"added\",\"value\":[4,5,6]},"
                 + "{\"key\":\"obj1\",\"status\":\"added\",\"value\":{\"nestedKey\":\"value\",\"isNested\":true}},"
-                + "{\"key\":\"setting1\",\"status\":\"updated\",\"oldValue\":\"Some value\",\"newValue\":\"Another value\"},"
+                + "{\"key\":\"setting1\",\"status\":\"updated\",\"oldValue\":\"Some value\","
+                + "\"newValue\":\"Another value\"},"
                 + "{\"key\":\"setting2\",\"status\":\"updated\",\"oldValue\":200,\"newValue\":300},"
                 + "{\"key\":\"setting3\",\"status\":\"updated\",\"oldValue\":true,\"newValue\":\"none\"}]";
         String actual = Differ.generate("src/examples/stylish1.json", "src/examples/stylish2.json", "json");

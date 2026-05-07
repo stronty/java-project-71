@@ -36,12 +36,13 @@ public class Plain {
                 newValue = String.valueOf(newType);
             }
 
-            switch (status) {
-                case "removed" -> diff[0] = diff[0] + "Property '" + key + "' was removed\n";
-                case "added" -> diff[0] = diff[0] + "Property '" + key + "' was added with value: " + newValue + "\n";
-                case "updated" -> diff[0] = diff[0] + "Property '" + key + "' was updated. From " + oldValue + " to " + newValue + "\n";
-                default -> {
-                }
+            if (status.equals("removed")) {
+                diff[0] = diff[0] + "Property '" + key + "' was removed\n";
+            } else if (status.equals("added")) {
+                diff[0] = diff[0] + "Property '" + key + "' was added with value: " + newValue + "\n";
+            } else if (status.equals("updated")) {
+                diff[0] = diff[0] + "Property '" + key + "' was updated."
+                        + " From " + oldValue + " to " + newValue + "\n";
             }
         });
         diff[0] = diff[0].substring(0, diff[0].lastIndexOf("\n"));

@@ -4,7 +4,7 @@ import java.util.concurrent.Callable;
 import picocli.CommandLine;
 
 @CommandLine.Command(name = "gendiff")
-public class App implements Callable<Integer> {
+public final class App implements Callable<Integer> {
     @CommandLine.Parameters(paramLabel = "filepath1",
           description = "path to first file")
     private String file1;
