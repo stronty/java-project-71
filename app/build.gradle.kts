@@ -17,6 +17,10 @@ sonar {
     properties {
         property("sonar.projectKey", "stronty_java-project-71")
         property("sonar.organization", "stronty")
+        property(
+            "sonar.coverage.jacoco.xmlReportPaths",
+            "build/reports/jacoco/test/jacocoTestReport.xml"
+        )
     }
 }
 jacoco {
@@ -27,6 +31,10 @@ tasks.test {
 }
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
 }
 dependencies {
     implementation(kotlin("stdlib"))
