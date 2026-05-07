@@ -19,6 +19,15 @@ sonar {
         property("sonar.organization", "stronty")
     }
 }
+jacoco {
+    toolVersion = "0.8.14"
+}
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+}
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("info.picocli:picocli:4.7.7")
@@ -44,4 +53,8 @@ tasks.withType<Checkstyle> {
 tasks.test {
     useJUnitPlatform()
 
+}
+
+dependencyLocking {
+    lockAllConfigurations()
 }
