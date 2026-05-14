@@ -1,6 +1,5 @@
 package hexlet.code.formatters;
 
-import java.lang.StringBuilder;
 import java.util.List;
 import java.util.Map;
 
