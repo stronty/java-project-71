@@ -16,7 +16,7 @@ import java.util.TreeSet;
 
 public class Differ {
 
-    public static Path getPath(String fileName) {
+    public static Path checkAndGetPath(String fileName) {
         Path path = Paths.get(fileName).toAbsolutePath().normalize();
 
         if (!Files.exists(path)) {
@@ -32,36 +32,40 @@ public class Differ {
     public static String generate(String path1, String path2, String format) {
         final var status = "status";
         List<Map<String, Object>> diffData = new ArrayList<>();
+        Map<String, Object> content1;
+        Map<String, Object> content2;
         try {
-            Map<String, Object> content1 = parse(getPath(path1));
-            Map<String, Object> content2 = parse(getPath(path2));
-
-            var keys = new TreeSet<String>();
-            keys.addAll(content1.keySet());
-            keys.addAll(content2.keySet());
-
-            for (String key : keys) {
-                boolean in1 = content1.containsKey(key);
-                boolean in2 = content2.containsKey(key);
-                Map<String, Object> data = new HashMap<>();
-                data.put("key", key);
-                data.put("oldValue", content1.get(key));
-                data.put("newValue", content2.get(key));
-
-                if (in1 && !in2) {
-                    data.put(status, "removed");
-                } else if (!in1 && in2) {
-                    data.put(status, "added");
-                } else if (Objects.equals(content1.get(key), content2.get(key))) {
-                    data.put(status, "unchanged");
-                } else {
-                    data.put(status, "updated");
-                }
-                diffData.add(data);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read input files", e);
+            content1 = parse(checkAndGetPath(path1));
+            content2 = parse(checkAndGetPath(path2));
+        } catch (IOException | RuntimeException e) {
+            System.out.println(e.getMessage());
+            return "";
         }
+
+        var keys = new TreeSet<String>();
+        keys.addAll(content1.keySet());
+        keys.addAll(content2.keySet());
+
+        for (String key : keys) {
+            boolean in1 = content1.containsKey(key);
+            boolean in2 = content2.containsKey(key);
+            Map<String, Object> data = new HashMap<>();
+            data.put("key", key);
+            data.put("oldValue", content1.get(key));
+            data.put("newValue", content2.get(key));
+
+            if (in1 && !in2) {
+                data.put(status, "removed");
+            } else if (!in1 && in2) {
+                data.put(status, "added");
+            } else if (Objects.equals(content1.get(key), content2.get(key))) {
+                data.put(status, "unchanged");
+            } else {
+                data.put(status, "updated");
+            }
+            diffData.add(data);
+        }
+
         return Formatter.decide(diffData, format);
     }
 }

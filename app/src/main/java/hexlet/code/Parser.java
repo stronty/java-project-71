@@ -17,8 +17,9 @@ public class Parser {
         return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
     }
 
-    public static Map<String, Object> parse(Path path) throws IOException {
+    public static Map<String, Object> parse(Path path) throws RuntimeException, IOException {
         String content = Files.readString(path);
+
         ObjectMapper mapper;
         String extension = getExtension(path);
         Map<String, Object> data = new HashMap<>();
@@ -29,6 +30,8 @@ public class Parser {
         } else if (extension.equals("yaml") || extension.equals("yml")) {
             mapper = new YAMLMapper();
             data = mapper.readValue(content, Map.class);
+        } else {
+            throw new RuntimeException("Format does not exist");
         }
 
         return new TreeMap<>(data);
