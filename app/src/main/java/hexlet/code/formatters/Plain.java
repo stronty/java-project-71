@@ -1,5 +1,6 @@
 package hexlet.code.formatters;
 
+import java.lang.StringBuilder;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class Plain {
     }
 
     public static String formatter(List<Map<String, Object>> data) {
-        final String[] diff = {""};
+        StringBuilder diff = new StringBuilder();
         final var property = "Property '";
         data.forEach(line -> {
             var status = line.get("status").toString();
@@ -38,15 +39,18 @@ public class Plain {
             }
 
             if (status.equals("removed")) {
-                diff[0] = diff[0] + property + key + "' was removed\n";
+                diff.append(property + key + "' was removed\n");
             } else if (status.equals("added")) {
-                diff[0] = diff[0] + property + key + "' was added with value: " + newValue + "\n";
+                diff.append(property + key + "' was added with value: " + newValue + "\n");
             } else if (status.equals("updated")) {
-                diff[0] = diff[0] + property + key + "' was updated."
-                        + " From " + oldValue + " to " + newValue + "\n";
+                diff.append(property + key + "' was updated."
+                        + " From " + oldValue + " to " + newValue + "\n");
             }
         });
-        diff[0] = diff[0].substring(0, diff[0].lastIndexOf("\n"));
-        return diff[0];
+        int lastNewline = diff.lastIndexOf("\n");
+        if (lastNewline != -1) {
+            diff.setLength(lastNewline);
+        }
+        return diff.toString();
     }
 }
